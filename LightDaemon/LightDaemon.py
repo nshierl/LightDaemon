@@ -22,6 +22,7 @@ if __name__ == "__main__":
 	#dataClass = color.Color(LED_COUNT, 0, 255, 100)
 	#dataClass = rainbow.Rainbow(LED_COUNT)
 	dataClass = rain.Rain(LED_COUNT)
+	
 	while True:
 		connection.write(dataClass.getData().ljust(330, '\x00'))
 		time.sleep(0.1)

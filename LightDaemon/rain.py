@@ -1,6 +1,36 @@
 import random
 
-DROPLET_COLOR = '\x00\xFF\xFF'
+DROPLET_COLOR = '\x00\x99\xFF'
+
+class Lightning:
+	startIndex = 0
+	stopIndex = 0
+	initalIndex = 0
+	index = 0
+
+	def __init__(self, startIndex, stopIndex):
+		self.startIndex = startIndex
+		self.stopIndex = stopIndex
+
+	def getLightningArray(self):
+		ret = {}
+		# Start lightning
+		if random.randint(0, 100) % 99 == 0:
+			self.initalIndex = random.randint(30, 50)
+			self.index = self.initalIndex
+
+		# Retrigger
+		if (random.randint(0, 20) & 7 == 0) and (self.index != 0):
+			self.index += int(self.index * random.random() * (1 - (self.index / self.initalIndex)))
+
+		if self.initalIndex > 0:
+			for index in range(self.startIndex, self.stopIndex):
+				ret[str(index)] = ''.join([chr(int(255 * (self.index / self.initalIndex))) for x in range(0, 3)])
+		self.index -= random.randint(0, self.index) if self.index > 0 else 0
+		if self.index == 0:
+			self.initalIndex = 0
+		return ret
+
 
 class Droplet:
 	startIndex = 0
@@ -25,19 +55,25 @@ class Droplet:
 			return self.currentIndex
 
 
-
 class Rain:
 	numLEDS = 0
 	droplets = []
+	lightning = None
 	data = []
 	
 
 	def __init__(self, numLEDS):
 		self.numLEDS = numLEDS
+		self.lightning = Lightning(51, 80)
 
 	def getData(self):
+		lightningData = self.lightning.getLightningArray()
 		self.updateDroplets()
 		self.createDroplets()
+
+		for key in lightningData:
+			self.data[int(key)] = lightningData[key]
+
 		return ''.join(self.data)
 
 	def createDroplets(self):
