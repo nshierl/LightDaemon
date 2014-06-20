@@ -1,5 +1,5 @@
 import serial, os, time, sys, random, string, Tkinter
-import spectrum, color
+import spectrum, color, rainbow
 
 COM_PORT = 'COM3'
 BAUD = 115200		# Fastest baud possible so speed up refresh
@@ -19,13 +19,10 @@ if __name__ == "__main__":
 	connection = init()
 
 	#dataClass = spectrum.SpectrumGenerator(LED_COUNT)	
-	dataClass = color.Color(LED_COUNT, 0, 255, 100)
+	#dataClass = color.Color(LED_COUNT, 0, 255, 100)
+	dataClass = rainbow.Rainbow(LED_COUNT)
 	while True:
 		connection.write(dataClass.getData())
-		time.sleep(0.05)
-
-	l = Tkinter.Label(text = "See me?")
-	l.pack()
-	l.mainloop()
+		time.sleep(0.01)
 
 
