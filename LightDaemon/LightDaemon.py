@@ -23,6 +23,6 @@ if __name__ == "__main__":
 	dataClass = rainbow.Rainbow(LED_COUNT)
 	while True:
 		connection.write(dataClass.getData())
-		time.sleep(0.01)
+		time.sleep(0.1)
 
 

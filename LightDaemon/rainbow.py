@@ -15,6 +15,6 @@ class Rainbow:
 		return ''.join(self.colorArray)
 
 	def getRainbow(self, index):
-		rgb = colorsys.hsv_to_rgb((float(index) / self.numLEDS), 1, 1)
+		rgb = colorsys.hls_to_rgb((float(index) / self.numLEDS), .5, 1)
 		return ''.join(chr(int(x * 255)) for x in rgb)
 			
