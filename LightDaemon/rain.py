@@ -16,7 +16,7 @@ class Lightning:
 		ret = {}
 		# Start lightning
 		if random.randint(0, 100) % 99 == 0:
-			self.initalIndex = random.randint(30, 50)
+			self.initalIndex = random.randint(100, 200)
 			self.index = self.initalIndex
 
 		# Retrigger
@@ -26,7 +26,7 @@ class Lightning:
 		if self.initalIndex > 0:
 			for index in range(self.startIndex, self.stopIndex):
 				ret[str(index)] = ''.join([chr(int(255 * (self.index / self.initalIndex))) for x in range(0, 3)])
-		self.index -= random.randint(0, self.index) if self.index > 0 else 0
+		self.index -= random.randint(0, int(self.index * .25)) if self.index > 0 else 0
 		if self.index == 0:
 			self.initalIndex = 0
 		return ret
