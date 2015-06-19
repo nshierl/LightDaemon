@@ -1,20 +1,20 @@
+import colorsys
+
 class SpectrumGenerator:
 	numLEDS = 0
-	rgbColor = [255,0,0]
-	decrease = 0
-	increase = 1
-	index = 0
+	currentHueIndex = 0
+	maxHue = 10
 
-	def __init__(self, numLEDS):
+	def __init__(self, numLEDS, multiplier):
 		self.numLEDS = numLEDS
+		if(multiplier > 1):
+			self.maxHue = self.maxHue * multiplier
 
 	def getData(self):
-		self.increase = self.increase + 1 if self.rgbColor[self.increase] == 255 else self.increase
-		self.increase = 0 if self.increase == 3 else self.increase
-		self.decrease = self.decrease + 1 if self.rgbColor[self.decrease] == 0 else self.decrease
-		self.decrease = 0 if self.decrease == 3 else self.decrease
-		
-		self.rgbColor[self.decrease] -= 1
-		self.rgbColor[self.increase] += 1
-		self.index += 1
-		return ''.join(chr(self.rgbColor[0])+chr(self.rgbColor[1])+chr(self.rgbColor[2]) for x in range(self.numLEDS))
+		rgbColor = colorsys.hls_to_rgb((float(self.currentHueIndex) / (self.maxHue)), .5, 1)
+
+		self.currentHueIndex = self.currentHueIndex + 1
+		if(self.currentHueIndex > self.maxHue):
+			self.currentHueIndex = 0
+
+		return ''.join(chr(int(rgbColor[0] * 255))+chr(int(rgbColor[1] * 255))+chr(int(rgbColor[2] * 255)) for x in range(self.numLEDS))
