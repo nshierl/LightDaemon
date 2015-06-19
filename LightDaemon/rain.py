@@ -1,6 +1,6 @@
 import random
 
-DROPLET_COLOR = '\x00\x99\xFF'
+DROPLET_COLOR = '\xFF\x00\x99'
 
 class Lightning:
 	startIndex = 0
@@ -60,7 +60,7 @@ class Rain:
 	droplets = []
 	lightning = None
 	data = []
-	
+
 
 	def __init__(self, numLEDS):
 		self.numLEDS = numLEDS
@@ -88,4 +88,3 @@ class Rain:
 				self.droplets.remove(droplet)
 			else:
 				self.data[index] = DROPLET_COLOR
-

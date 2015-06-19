@@ -14,8 +14,6 @@ class SpectrumGenerator:
 		self.decrease = self.decrease + 1 if self.rgbColor[self.decrease] == 0 else self.decrease
 		self.decrease = 0 if self.decrease == 3 else self.decrease
 		
-		print "increase: %i decrease: %i r: %i g: %i b: %i " % (self.increase, self.decrease, self.rgbColor[0], self.rgbColor[1], self.rgbColor[2])
-
 		self.rgbColor[self.decrease] -= 1
 		self.rgbColor[self.increase] += 1
 		self.index += 1

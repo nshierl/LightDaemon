@@ -10,7 +10,7 @@ void setup()
   strip.begin();
   strip.show(); 
   
-  Serial.begin(115200); 
+  Serial.begin(250000); 
   while (!Serial) {;}
   Serial.println("Ready");
 }
