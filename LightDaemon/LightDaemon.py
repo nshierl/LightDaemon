@@ -18,10 +18,10 @@ def init():
 if __name__ == "__main__":
 	connection = init()
 
-	dataClass = spectrum.SpectrumGenerator(LED_COUNT, 200)
+	#dataClass = spectrum.SpectrumGenerator(LED_COUNT, 200)
 	#dataClass = color.Color(LED_COUNT, 0, 255, 100)
 	#dataClass = rainbow.Rainbow(LED_COUNT, 8)
-	#dataClass = rain.Rain(LED_COUNT)
+	dataClass = rain.Rain(LED_COUNT)
 
 	while True:
 		for i in xrange(60):

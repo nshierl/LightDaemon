@@ -2,6 +2,8 @@ import random
 
 DROPLET_COLOR = '\xFF\x00\x99'
 
+#TODO Scale lighting for higher framerate
+
 class Lightning:
 	startIndex = 0
 	stopIndex = 0
