@@ -20,7 +20,7 @@ if __name__ == "__main__":
 
 	#dataClass = spectrum.SpectrumGenerator(LED_COUNT)
 	#dataClass = color.Color(LED_COUNT, 0, 255, 100)
-	dataClass = rainbow.Rainbow(LED_COUNT)
+	dataClass = rainbow.Rainbow(LED_COUNT, 8)
 	#dataClass = rain.Rain(LED_COUNT)
 
 	while True:
