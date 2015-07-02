@@ -4,14 +4,16 @@ class SpectrumGenerator:
 	numLEDS = 0
 	currentHueIndex = 0
 	maxHue = 10
+	lightness = 0.5
 
-	def __init__(self, numLEDS, multiplier):
+	def __init__(self, numLEDS, multiplier, light = lightness):
 		self.numLEDS = numLEDS
+		self.lightness = light
 		if(multiplier > 1):
 			self.maxHue = self.maxHue * multiplier
 
 	def getData(self):
-		rgbColor = colorsys.hls_to_rgb((float(self.currentHueIndex) / (self.maxHue)), .5, 1)
+		rgbColor = colorsys.hls_to_rgb((float(self.currentHueIndex) / (self.maxHue)), self.lightness, 1)
 
 		self.currentHueIndex = self.currentHueIndex + 1
 		if(self.currentHueIndex > self.maxHue):

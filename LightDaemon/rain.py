@@ -1,6 +1,6 @@
 import random
 
-DROPLET_COLOR = '\xFF\x00\x99'
+DROPLET_COLOR = '\xFF0099'
 
 #TODO Scale lighting for higher framerate
 
@@ -9,10 +9,12 @@ class Lightning:
 	stopIndex = 0
 	initalIndex = 0
 	index = 0
+	numLEDS = 0
 
-	def __init__(self, startIndex, stopIndex):
+	def __init__(self, numLEDS, startIndex, stopIndex):
 		self.startIndex = startIndex
 		self.stopIndex = stopIndex
+		self.numLEDS = numLEDS
 
 	def getLightningArray(self):
 		ret = {}
@@ -39,15 +41,17 @@ class Droplet:
 	currentIndex = 0
 	direction = False # True - up | False - down
 	ledHeight = 0
+	numLEDS = 0
 
-	def __init__(self, ledHeight, start, up):
+	def __init__(self, numLEDS, ledHeight, start, up):
 		self.startIndex = start
 		self.currentIndex = start
 		self.direction = up
 		self.ledHeight = ledHeight
+		self.numLEDS = numLEDS
 
 	def getPosition(self):
-		if (abs(self.startIndex - self.currentIndex) == self.ledHeight) or (self.currentIndex >= 109):
+		if (abs(self.startIndex - self.currentIndex) == self.ledHeight) or (self.currentIndex >= (self.numLEDS -1)):
 			return -1
 		elif self.direction:
 			self.currentIndex -= 1
@@ -66,24 +70,24 @@ class Rain:
 
 	def __init__(self, numLEDS):
 		self.numLEDS = numLEDS
-		self.lightning = Lightning(51, 80)
+		self.lightning = Lightning(numLEDS,51, 80)
 
 	def getData(self):
-		lightningData = self.lightning.getLightningArray()
+		#lightningData = self.lightning.getLightningArray()
 		self.updateDroplets()
 		self.createDroplets()
 
-		for key in lightningData:
-			self.data[int(key)] = lightningData[key]
+		#for key in lightningData:
+		#	self.data[int(key)] = lightningData[key]
 
 		return ''.join(self.data)
 
 	def createDroplets(self):
 		if random.randint(0, 20) % 7 == 0:
-			self.droplets.append(Droplet(21, 50, True) if random.randint(0, 1) == 1 else Droplet(30, 80, False))
+			self.droplets.append(Droplet(self.numLEDS,21, 50, True) if random.randint(0, 1) == 1 else Droplet(self.numLEDS,30, 80, False))
 
 	def updateDroplets(self):
-		self.data = ['\x00\x00\x00' for x in range(self.numLEDS)]
+		self.data = ['\x000000' for x in range(self.numLEDS)]
 		for droplet in self.droplets:
 			index = droplet.getPosition()
 			if index == -1:
